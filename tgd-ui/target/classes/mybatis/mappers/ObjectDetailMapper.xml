@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.ObjectDetailMapper">
+
+    <insert id="insertDetail" useGeneratedKeys="true" keyProperty="objectDetailId" parameterType="com.yuxie.tgd.pojo.bean.ObjectDetail">
+        INSERT INTO object_detail (
+        object_id,
+        user_id,
+        object_version,
+        object_title,
+        object_introduction,
+        object_label_list,
+        object_key_word,
+        resource_enter,
+        resource_skip
+        ) VALUES (
+        #{objectId},#{userId},#{objectVersion},#{objectTitle},#{objectIntroduction},#{objectLabelList},#{objectKeyWord},#{resourceEnter},#{resourceSkip}
+        )
+    </insert>
+
+    <update id="updateObjectDetailById">
+        UPDATE object_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="objectTitle != null ">
+                object_title = #{objectTitle},
+            </if>
+            <if test="objectIntroduction != null ">
+                object_introduction = #{objectIntroduction},
+            </if>
+            <if test="objectLabelList != null ">
+                object_label_list = #{objectLabelList},
+            </if>
+            <if test="objectKeyWord != null ">
+                object_key_word = #{objectKeyWord},
+            </if>
+            <if test="resourceEnter != null ">
+                resource_enter = #{resourceEnter},
+            </if>
+            <if test="resourceSkip != null ">
+                resource_skip = #{resourceSkip},
+            </if>
+        </trim>
+        WHERE object_detail_id = #{objectDetailId}
+    </update>
+
+    <update id="updateMessageId">
+        UPDATE object_detail
+        SET object_message_id = #{objectMessageId}
+        WHERE object_detail_id = #{objectDetailId}
+    </update>
+
+    <update id="updateObjectDetailStatus">
+        UPDATE object_detail
+        SET object_status = #{objectStatus}
+        WHERE object_detail_id = #{objectDetailId}
+    </update>
+
+    <update id="updateObjectResourcePool">
+        UPDATE object_detail SET
+        <if test="resource == -1">
+            resource_pool = 0
+        </if>
+        <if test="resource != -1">
+            resource_pool = resource_pool + #{resource}
+        </if>
+        WHERE object_detail_id = #{objectDetailId}
+    </update>
+
+    <delete id="delByDetailId">
+        DELETE FROM object_detail
+        WHERE object_detail_id = #{objectDetailId}
+    </delete>
+
+
+    <select id="getObjectStatus" resultType="java.lang.Integer">
+        SELECT object_status FROM onject_detail WHERE object_detail_id=#{objectDetailId}
+    </select>
+
+    <select id="getObjectDetailById" resultType="com.yuxie.tgd.pojo.bean.ObjectDetail">
+        SELECT *
+        FROM object_detail
+        WHERE object_detail_id = #{objectDetailId}
+    </select>
+
+    <select id="getMessageId" resultType="java.lang.Long">
+        SELECT object_message_id
+        FROM object_detail
+        WHERE object_detail_id = #{objectDetailId}
+    </select>
+
+    <select id="getKeyWordByDetailId" resultType="java.lang.String">
+        SELECT object_key_word
+        FROM object_detail
+        WHERE object_detail_id = #{objectDetailId}
+    </select>
+
+    <select id="getUserIdByDetailId" resultType="java.lang.Long">
+        SELECT user_id
+        FROM object_detail
+        WHERE object_detail_id = #{objectDetailId}
+    </select>
+
+    <select id="getObjectResourcePool" resultType="java.lang.Integer">
+        SELECT resource_pool
+        FROM object_detail
+        WHERE object_detail_id = #{objectDetailId}
+    </select>
+
+</mapper>

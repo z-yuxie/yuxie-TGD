@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.ObjectLinkMapper">
+
+    <sql id="objectIdDTO">
+        object_id AS "objectId",
+        user_id AS "userId",
+        object_type AS "objectType"
+    </sql>
+
+    <insert id="insertObjectLink" useGeneratedKeys="true" keyProperty="objectId" parameterType="com.yuxie.tgd.pojo.bean.ObjectLink">
+        INSERT INTO object_link (
+        user_id,
+        object_type,
+        parent_object_id,
+        parent_object_version
+        ) VALUES (
+        #{userId},#{objectType},#{parentObjectId},#{parentObjetVersion}
+        )
+    </insert>
+
+    <update id="updateDetailId">
+        UPDATE object_link
+        SET max_detail_id = #{maxDetailId}
+        WHERE object_id = #{objectId}
+    </update>
+
+    <update id="updateObjectStatus">
+        UPDATE object_link
+        SET object_status = #{objectStatus}
+        WHERE object_id = #{objectId}
+    </update>
+
+    <delete id="delById">
+        DELETE FROM object_link
+        WHERE object_id = #{objectId}
+    </delete>
+
+    <select id="getMaxDetailId" resultType="java.lang.Long">
+        SELECT max_detail_id FROM object_link WHERE object_id=#{objectId}
+    </select>
+
+    <select id="getObjectIdDTOList" resultType="com.yuxie.tgd.pojo.dto.ObjectIdDTO" parameterType="com.yuxie.tgd.pojo.dto.SelectObjectList">
+        SELECT
+        <include refid="objectIdDTO"/>
+        FROM object_link
+        WHERE
+        <if test="listType == -2">
+            (object_status = -1 OR object_status >0)
+        </if>
+        <if test="listType == -1">
+            object_status = -1
+        </if>
+        <if test="listType == 0">
+            object_status >= 0
+        </if>
+        <if test="listType == 1">
+            object_status > 0
+        </if>
+        <if test="listType == 2">
+            object_status != -2
+        </if>
+        <if test="objectType == 0 ">
+            AND (object_type = 0 OR object_type = 1)
+        </if>
+        <if test="objectType != 0">
+            AND object_type = #{objectType}
+        </if>
+        <if test="parentObjectId != null and parentObjectVersion != null">
+            AND parent_object_id = #{parentObjectId} AND parent_object_version = #{parentObjectVersion}
+        </if>
+        ORDER BY
+        <choose>
+            <when test="sortType=='1'">
+                update_time,create_time
+            </when>
+            <otherwise>
+                create_time,update_time
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getTaskIdByObjectId" resultType="java.lang.Long">
+        SELECT object_id
+        FROM object_link
+        WHERE parent_object_id = #{parentObjectId} AND object_type = 2
+    </select>
+
+    <select id="getObjectTypeByObjectId" resultType="java.lang.Integer">
+        SELECT object_type
+        FROM object_link
+        WHERE object_id = #{objectId}
+    </select>
+
+    <select id="getObjectStatus" resultType="java.lang.Integer">
+        SELECT object_status
+        FROM object_link
+        WHERE object_id = #{objectId}
+    </select>
+
+    <select id="getObjectLinkById" resultType="com.yuxie.tgd.pojo.bean.ObjectLink">
+        SELECT *
+        FROM object_link
+        WHERE object_id = #{objectId}
+    </select>
+
+    <select id="getParentObjectId" resultType="java.lang.Long">
+        SELECT parent_object_id
+        FROM object_link
+        WHERE object_id = #{objectId}
+    </select>
+
+    <select id="getObjectIdDTOByObjectId" resultType="com.yuxie.tgd.pojo.dto.ObjectIdDTO">
+        SELECT
+        <include refid="objectIdDTO"/>
+        FROM object_link
+        WHERE object_id = #{objectId} AND object_status >= 0
+    </select>
+
+    <select id="getTaskIdListByType" resultType="java.lang.Long">
+        SELECT object_id
+        FROM object_link
+        WHERE
+        <if test="listType == -2">
+            (object_status = -1 OR object_status >0)
+        </if>
+        <if test="listType == -1">
+            object_status = -1
+        </if>
+        <if test="listType == 0">
+            object_status >= 0
+        </if>
+        <if test="listType == 1">
+            object_status > 0
+        </if>
+        <if test="listType == 2">
+            object_status != -2
+        </if>
+        AND object_type = 2
+    </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.LabelListMapper">
+
+    <insert id="insertLabel" useGeneratedKeys="true" keyProperty="labelId" parameterType="com.yuxie.tgd.pojo.bean.LabelList">
+        INSERT INTO label_list (
+        label_name,
+        user_id
+        ) VALUES (
+        #{labelName},#{userId}
+        )
+
+    </insert>
+
+    <update id="updateLabelHotNum">
+        UPDATE label_list
+        SET hot_num = hot_num + #{changeNum}
+        WHERE label_name = #{labelName}
+    </update>
+
+    <update id="updateLabelHotNumById">
+        UPDATE label_list
+        SET hot_num = hot_num + #{changeNum}
+        WHERE label_id = #{labelId}
+    </update>
+
+    <select id="getLabelListBeanById" resultType="com.yuxie.tgd.pojo.bean.LabelList">
+        SELECT *
+        FROM label_list
+        WHERE label_id = #{labelId}
+    </select>
+
+    <select id="getLabelList" resultType="com.yuxie.tgd.pojo.bean.LabelList">
+        SELECT *
+        FROM label_list
+        ORDER BY hot_num limit 0,#{labelNum}
+    </select>
+
+    <select id="getLableIdByName" resultType="java.lang.Long">
+        SELECT label_id
+        FROM label_list
+        WHERE label_name = #{labelName}
+    </select>
+
+</mapper>

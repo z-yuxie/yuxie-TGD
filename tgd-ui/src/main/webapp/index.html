@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/jquery-2.0.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/sha.js"></script>
+  <script type="text/javascript" src="js/sha1.js"></script>
+  <script type="text/javascript" src="js/sha256.js"></script>
+  <script type="text/javascript" src="js/sha512.js"></script>
+  <script type="text/javascript" src="js/sha3.js"></script>
+  <script type="text/javascript" src="js/sha_dev.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <nav class="navbar navbar-default navbar-fixed-top"
+           role="navigation">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse"
+                  data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span><span
+                  class="icon-bar"></span><span class="icon-bar"></span><span
+                  class="icon-bar"></span>
+          </button>
+          <a id="indexClick" class="navbar-brand" href="#">夜之空</a>
+        </div>
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a id="objectListClick" href="#">对象列表</a></li>
+            <li><a id="userListClick" href="#">用户列表</a></li>
+            <li><a id="reLabekListClick" href="#">刷新标签列表</a></li>
+            <li><a id="createObjectClick" href="#">创建对象</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input id="searchInputValue" class="form-control" type="text" />
+            </div>
+            <button id="searchButton" class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索</button>
+          </form>
+        </div>
+      </nav>
+      <div style="height: 55px"></div>
+      <div class="row clearfix">
+        <div id="labelList" class="col-md-3 column">
+          <br/>
+          <div class="btn-group col-md-12">
+            <label class="labelId" style="display:none;">标签ID</label>
+            <button class="btn btn-primary labelGlyphiconBtn" type="button"><em class="glyphicon glyphicon-heart labelGlyphicon" aria-hidden="true"></em></button>
+            <button class="btn btn-default labelName" type="button">这是标签文本</button>
+          </div>
+        </div>
+        <div class="col-md-6 column " id="listCore">
+          <select id="sortTypeSelect">
+            <option value="0" selected="selected">按更新时间排序</option>
+            <option value="1">按创建时间排序</option>
+          </select>
+          <select id="listTypeSelect">
+            <option value="0" selected="selected">所有</option>
+            <option value="3">我的收藏或关注</option>
+          </select>
+          <button id="reObjectOrUserList" class="btn btn-primary pull-right">确定</button>
+          <!-- 列表内容 -->
+          <div id="objectOrUserList" class="row clearfix">
+            <div class="col-md-12 column">
+              <h3 class="objectTitle">
+                这是对象标题
+              </h3>
+              <blockquote>
+                <p class="objectIntroduction">
+                  这是对象简介。。
+                </p> <small>当前持有者<label class="ownerId" style="display:none;">xxxxx</label><cite class="ownerName btn btn-link">用户名</cite></small>
+              </blockquote>
+              <div class="row clearfix">
+                <div class="col-md-4 column">
+                  <label>被举报次数</label>
+                </div>
+                <div class="col-md-4 column">
+                  <label>奖池累计值</label>
+                </div>
+                <div class="col-md-4 column">
+                </div>
+              </div>
+              <div class="row clearfix">
+                <div class="col-md-4 column">
+                  <label class="objectStatus">0</label>
+                </div>
+                <div class="col-md-4 column">
+                  <label class="resourcePoolNum">123</label>
+                </div>
+                <div class="col-md-4 column">
+                  <label class="objectId" style="display:none;">112</label>
+                  <label class="objectType" style="display:none;">1</label>
+                  <button type="button" class="btn btn-primary pull-right getObjectMessage">进去看看</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul id="myPageView" class="pagination pagination-sm pull-right">
+            <li>
+              <a id="previousPage" href="#">上一页</a>
+            </li>
+            <li>
+              <a id="pageNum" href="#">1</a>
+            </li>
+            <li>
+              <a id="nextPage" href="#">下一页</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 column">
+          <div class="tabbable" id="tabs-46917">
+            <ul class="nav nav-tabs">
+              <li id="userMessageActive" class="active">
+                <a href="#userMessageView" data-toggle="tab">用户信息</a>
+              </li>
+              <li id="commentsListActive">
+                <a href="#commentsList" data-toggle="tab">评论列表</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="userMessageView">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="userNameInput">用户名</label><input type="text" class="form-control" id="userNameInput" />
+                  </div>
+                  <div class="form-group">
+                    <label for="userPwInput">密码</label><input type="password" class="form-control" id="userPwInput" />
+                  </div>
+                </form>
+                <button id="loginBtn" class="btn btn-primary">登录</button>
+                <button id="registLink" class="btn btn-link">注册</button>
+              </div>
+              <div class="tab-pane" id="commentsList">
+                <blockquote>
+                  <p class="commentsMessage">
+                    这是一段评论的内容。
+                  </p>
+                  <small>来自：<cite class="commentsUserName">用户名</cite></small>
+                  <div class="btn-group">
+                    <button class="btn btn-primary" type="button"><em class="glyphicon glyphicon-thumbs-up"></em> 赞</button> <button class="btn btn-primary" type="button"><em class="glyphicon glyphicon-thumbs-down"></em> 踩</button>
+                  </div>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/user.js"></script>
+<script src="js/object.js"></script>
+<script src="js/label.js"></script>
+</body>
+</html>

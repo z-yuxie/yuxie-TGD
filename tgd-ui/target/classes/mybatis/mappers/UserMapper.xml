@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.UserMapper">
+
+    <sql id="userMessage">
+        user_id AS "userId",
+        user_name AS "userName",
+        user_level AS "userLevel",
+        user_status AS "userStatus",
+        resource AS "resource",
+        email AS "email",
+        phone AS "phone",
+        contact AS "contact",
+        regist_time AS "registTime"
+    </sql>
+
+    <sql id="userBaseMessage">
+        user_id AS "userId",
+        user_name AS "userName",
+        contact AS "contact",
+        user_status AS "userStatus"
+    </sql>
+
+    <insert id="userResgit" useGeneratedKeys="true" keyProperty="userId" parameterType="com.yuxie.tgd.pojo.bean.YuxieUser">
+        INSERT INTO yuxie_user (
+        user_name,
+        user_pw,
+        email,
+        phone,
+        contact
+        ) VALUES (
+        #{userName},#{userPw},#{email},#{phone},#{contact}
+        )
+    </insert>
+    <update id="updateUserMessage" parameterType="com.yuxie.tgd.pojo.bean.YuxieUser">
+        UPDATE yuxie_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null ">
+                user_name = #{userName},
+            </if>
+            <if test="userPw != null ">
+                user_pw = #{userPw},
+            </if>
+            <if test="email != null ">
+                email = #{email},
+            </if>
+            <if test="phone != null ">
+                phone = #{phone},
+            </if>
+            <if test="contact != null ">
+                contact = #{contact},
+            </if>
+        </trim>
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="updateUserStatus">
+        UPDATE yuxie_user
+        SET user_status = #{userStatus}
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="updateUserResource">
+        UPDATE yuxie_user
+        SET resource = #{resource}
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="updateUserLevel">
+        UPDATE yuxie_user
+        SET user_level = #{userLevel}
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="isManager" resultType="java.lang.Integer">
+        SELECT COUNT(user_id) FROM (SELECT user_id FROM yuxie_user ORDER BY resource limit 0,10) AS my_level WHERE user_id IN (#{userId});
+    </select>
+
+    <select id="getUserCountByPw" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM yuxie_user WHERE user_name = #{userName} and user_pw = #{userPw}
+    </select>
+
+    <select id="getUserMessage" resultType="com.yuxie.tgd.pojo.vo.UserMessageVO">
+        SELECT
+        <include refid="userMessage"/>
+        FROM yuxie_user
+        WHERE
+        user_id = #{userId}
+    </select>
+
+    <select id="getUserIdByPw" resultType="java.lang.Long">
+        SELECT user_id FROM yuxie_user WHERE user_name = #{userName} and user_pw = #{userPw}
+    </select>
+
+    <select id="getUserStatus" resultType="java.lang.Integer">
+        SELECT user_status FROM yuxie_user WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserResource" resultType="java.lang.Integer">
+        SELECT resource
+        FROM yuxie_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserBaseMessage" resultType="com.yuxie.tgd.pojo.vo.UserBaseVO">
+        SELECT
+        <include refid="userBaseMessage"/>
+        FROM yuxie_user
+        WHERE
+        user_id = #{userId}
+    </select>
+
+    <select id="getUserList" resultType="com.yuxie.tgd.pojo.vo.UserBaseVO">
+        SELECT
+        <include refid="userBaseMessage"/>
+        FROM yuxie_user
+        WHERE
+        <if test="listType == -2">
+            user_status = -1 OR user_status >0
+        </if>
+        <if test="listType == -1">
+            user_status = -1
+        </if>
+        <if test="listType == 0">
+            user_status = 0
+        </if>
+        <if test="listType == 1">
+            user_status > 0
+        </if>
+        <if test="listType == 2">
+            user_status != -2
+        </if>
+        LIMIT #{lineNum},30
+    </select>
+
+    <select id="getUserNameById" resultType="java.lang.String">
+        SELECT user_name
+        FROM yuxie_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserPw" resultType="java.lang.String">
+        SELECT user_pw
+        FROM yuxie_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserIdListByType" resultType="java.lang.Long">
+        SELECT user_id
+        FROM yuxie_user
+        WHERE
+        <if test="listType == -2">
+            user_status = -1 OR user_status >0
+        </if>
+        <if test="listType == -1">
+            user_status = -1
+        </if>
+        <if test="listType == 0">
+            user_status = 0
+        </if>
+        <if test="listType == 1">
+            user_status > 0
+        </if>
+        <if test="listType == 2">
+            user_status != -2
+        </if>
+    </select>
+
+</mapper>

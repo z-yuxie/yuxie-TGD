@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.ObjectMessageMapper">
+
+    <insert id="insertMessage" useGeneratedKeys="true" keyProperty="objectMessageId" parameterType="com.yuxie.tgd.pojo.bean.ObjectMessage">
+        INSERT INTO object_message (
+        object_detail_id,
+        object_message_text
+        ) VALUES (
+        #{objectDetailId},#{objectMessageText}
+        )
+    </insert>
+
+    <update id="updateObjectMessage">
+        UPDATE object_message
+        SET object_message_text = #{objectMessageText}
+        WHERE object_message_id = #{objectMessageId}
+    </update>
+
+    <delete id="delByMessageId">
+        DELETE FROM object_message
+        WHERE object_message_id = #{objectMessageId}
+    </delete>
+
+    <select id="getObjectMessageById" resultType="java.lang.String">
+        SELECT object_message_text
+        FROM object_message
+        WHERE object_message_id = #{objectMessageId}
+    </select>
+
+    <select id="getObjectMessageBeanById" resultType="com.yuxie.tgd.pojo.bean.ObjectMessage">
+        SELECT *
+        FROM object_message
+        WHERE object_message_id = #{objectMessageId}
+    </select>
+
+</mapper>

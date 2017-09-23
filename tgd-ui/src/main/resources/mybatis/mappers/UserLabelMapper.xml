@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.UserLabelMapper">
+
+    <insert id="insertAttention" parameterType="com.yuxie.tgd.pojo.bean.UserLabel">
+        INSERT INTO user_label (
+        user_id,
+        label_id
+        ) VALUES (
+        #{userId},#{labelId}
+        )
+    </insert>
+
+    <update id="updateAttentionType">
+        UPDATE user_label
+        SET attention_type = #{attentionType}
+        WHERE user_id = #{userId} AND label_id = #{labelId}
+    </update>
+
+    <select id="getLabelIdListByUserId" resultType="java.lang.Long">
+        SELECT label_id
+        FROM user_label
+        WHERE user_id = #{userId} AND attention_type = 1
+    </select>
+
+    <select id="getAttentionNum" resultType="java.lang.Integer">
+        SELECT attention_type
+        FROM user_label
+        WHERE user_id = #{userId} AND label_id = #{labelId}
+    </select>
+
+</mapper>

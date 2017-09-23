@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>yuxie-tgd</artifactId>
+        <groupId>com.yuxie.tgd</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>tgd-ui</artifactId>
+    <packaging>war</packaging>
+    <name>tgd-ui Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.yuxie.tgd</groupId>
+            <artifactId>tgd-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- Jackson Json处理工具包 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- JSP相关 -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache工具组件 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+
+        <!-- jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yuxie.tgd</groupId>
+            <artifactId>tgd-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--&lt;!&ndash; RabbitMQ &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.amqp</groupId>-->
+            <!--<artifactId>spring-rabbit</artifactId>-->
+            <!--<version>1.4.0.RELEASE</version>-->
+        <!--</dependency>-->
+    </dependencies>
+    <build>
+        <!--<plugins>-->
+            <!--&lt;!&ndash; 配置Tomcat插件 &ndash;&gt;-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<path>/</path>-->
+                    <!--<port>8081</port>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+        <finalName>tgd-ui</finalName>
+    </build>
+</project>

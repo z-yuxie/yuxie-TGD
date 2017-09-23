@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="tgd-ui:war">
+    <output-path>$PROJECT_DIR$/tgd-ui/target</output-path>
+    <root id="archive" name="tgd-ui.war">
+      <element id="artifact" artifact-name="tgd-ui:war exploded" />
+    </root>
+  </artifact>
+</component>

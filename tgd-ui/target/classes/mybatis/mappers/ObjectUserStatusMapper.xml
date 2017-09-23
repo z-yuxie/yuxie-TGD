@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.ObjectUserStatusMapper">
+
+    <insert id="insertStatus">
+        INSERT INTO object_user_status (
+        user_id,
+        object_id,
+        status_num
+        ) VALUES (
+        #{userId},#{objectId},#{statusNum}
+        )
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE object_user_status
+        SET show_num = #{showNum}
+        WHERE user_id = #{userId} AND object_id = #{objectId} AND status_num = #{statusNum}
+    </update>
+
+    <update id="updateOwnerStatusToNo">
+        UPDATE object_user_status
+        SET show_num = 0
+        WHERE object_id = #{objectId} AND status_num = 4 AND show_num = 1
+    </update>
+
+    <select id="getInvolvedUserIdListByObejctId" resultType="java.lang.Long">
+        SELECT DISTINCT user_id
+        FROM object_user_status
+        WHERE object_id = #{objectId}
+    </select>
+
+    <select id="getInvolvedUserCountByObjectId" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT user_id)
+        FROM object_user_status
+        WHERE object_id = #{objectId}
+    </select>
+
+    <select id="getPassStatusNum" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT user_id)
+        FROM object_user_status
+        WHERE user_id = #{userId} AND object_id =#{objectId} AND (status_num = 3 OR status_num = 4) AND show_num = 1
+    </select>
+
+    <select id="getStatusNum" resultType="java.lang.Integer">
+        SELECT status_num
+        FROM object_user_status
+        WHERE user_id = #{userId} AND object_id =#{objectId} AND show_num = 1
+    </select>
+
+    <select id="getStatusTimes" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT user_id)
+        FROM object_user_status
+        WHERE object_id = #{objectId} AND status_num = #{statusNum} AND show_num = 1
+    </select>
+
+    <select id="getShowNum" resultType="java.lang.Integer">
+        SELECT show_num
+        FROM object_user_status
+        WHERE user_id = #{userId} AND object_id = #{objectId} AND status_num = #{statusNum}
+    </select>
+
+    <select id="getUpTimes" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT user_id)
+        FROM object_user_status
+        WHERE object_id = #{objectId} AND status_num = 1 AND show_num = 1
+    </select>
+
+    <select id="getDownTimes" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT user_id)
+        FROM object_user_status
+        WHERE object_id = #{objectId} AND status_num = -1 AND show_num = 1
+    </select>
+
+    <select id="getObjectIdListByUserIdAndStatus" resultType="java.lang.Long">
+        SELECT object_id
+        FROM object_user_status
+        WHERE user_id = #{userId} AND status_num = #{statusNum} AND show_num = #{showNum}
+    </select>
+</mapper>

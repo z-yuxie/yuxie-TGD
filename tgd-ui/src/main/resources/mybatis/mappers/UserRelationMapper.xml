@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxie.tgd.mymapper.UserRelationMapper">
+    <insert id="insertUserRelation" parameterType="com.yuxie.tgd.pojo.bean.UserRelation">
+        INSERT user_relation (
+        user_id,
+        relation_user_id,
+        relation_type
+        ) VALUES (
+        #{userId},#{relationUserId},#{relationType}
+        )
+    </insert>
+
+    <update id="updateUserRelation" parameterType="com.yuxie.tgd.pojo.bean.UserRelation">
+        UPDATE user_relation
+        SET relation_type = #{relationType}
+        WHERE user_id = #{userId} AND relation_user_id = #{relationUserId}
+    </update>
+
+
+    <select id="getUserRelation" resultType="java.lang.Integer">
+        SELECT relation_type FROM user_relation
+        WHERE user_id = #{userId} AND relation_user_id = #{checkedUserId}
+    </select>
+
+    <select id="getUserIdList" resultType="java.lang.Long">
+        SELECT relation_user_id
+        FROM user_relation
+        WHERE user_id = #{userId} AND relation_type = #{relationType}
+    </select>
+
+</mapper>
