@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 数据掩码工具类
+ */
 public class HideMarkUtils {
 
     /**
