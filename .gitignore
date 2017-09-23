@@ -23,3 +23,11 @@ hs_err_pid*
 
 # Idea
 .idea/
+tgd-dao/target/
+tgd-interface/target/
+tgd-service/target/
+tgd-ui/src/main/webapp/data/
+tgd-ui/target/classes/com/
+tgd-ui/target/generated-sources/
+tgd-ui/target/tgd-ui/WEB-INF/classes/com/
+tgd-ui/target/tgd-ui/WEB-INF/lib/
