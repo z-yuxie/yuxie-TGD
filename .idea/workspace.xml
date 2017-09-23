@@ -234,8 +234,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="765" />
-    <option name="y" value="101" />
+    <option name="x" value="-37" />
+    <option name="y" value="100" />
     <option name="width" value="1418" />
     <option name="height" value="882" />
   </component>
@@ -1087,7 +1087,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="588407000" />
+    <option name="totallyTimeSpent" value="588980000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
