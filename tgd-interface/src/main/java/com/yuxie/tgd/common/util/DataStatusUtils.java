@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 计算数据的状态值的工具类
+ */
 public class DataStatusUtils {
 
     /**
