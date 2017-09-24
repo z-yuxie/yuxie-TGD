@@ -31,55 +31,7 @@ public class App
 //        String json = JSONObject.toJSONString("zxxx");
 //        System.out.println(StringUtils.isBlank(json));
 //        System.out.println(keyWordList.contains(""));
-        Persion myPersionTest = new Persion();
-        myPersionTest.setSessionId("xxxxxxxxxxxxx");
-        myPersionTest.setUserId(123456789L);
-        myPersionTest.setUserName("hhhhhhh");
-        String json = JSONObject.toJSONString(myPersionTest);
-        System.out.println(json);
-//        System.out.println((a-1)%2);
-//        System.out.println((b-1)%2);
-    }
-}
-
-class Persion{
-    //用户ID
-    private Long userId;
-    //会话ID
-    private String sessionId;
-    //用户名
-    private String userName;
-
-    @Override
-    public String toString() {
-        return "Persion{" +
-                "userId=" + userId +
-                ", sessionId='" + sessionId + '\'' +
-                ", userName='" + userName + '\'' +
-                '}';
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+        System.out.println((a-1)%2);
+        System.out.println((b-1)%2);
     }
 }
