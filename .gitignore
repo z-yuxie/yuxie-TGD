@@ -31,3 +31,4 @@ tgd-ui/target/classes/com/
 tgd-ui/target/generated-sources/
 tgd-ui/target/tgd-ui/WEB-INF/classes/com/
 tgd-ui/target/tgd-ui/WEB-INF/lib/
+*.iml
