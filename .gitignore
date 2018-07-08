@@ -15,12 +15,22 @@ buildNumber.properties
 .project
 .classpath
 
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
 # Idea Project file
 *.iml
 *.ipr
 *.iws
-.idea
+.idea/
+tgd-dao/target/
+tgd-interface/target/
+tgd-service/target/
+tgd-ui/src/main/webapp/data/
+tgd-ui/target/classes/com/
+tgd-ui/target/generated-sources/
+tgd-ui/target/tgd-ui/WEB-INF/classes/com/
+tgd-ui/target/tgd-ui/WEB-INF/lib/
 out
 test-output
 atlassian-ide-plugin.xml
